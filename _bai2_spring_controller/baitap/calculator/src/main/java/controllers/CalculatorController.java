@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 @Controller
 public class CalculatorController {
     @GetMapping("/")
-    public String test(Model model) {
+    public String test() {
         return "index";
     }
     @GetMapping("/calculator")

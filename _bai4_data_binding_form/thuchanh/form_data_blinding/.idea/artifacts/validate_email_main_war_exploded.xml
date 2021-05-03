@@ -1,0 +1,24 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="validate_email.main:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/validate_email_main_war_exploded</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="validate_email.main" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Gradle: org.springframework:spring-webmvc:5.3.2" />
+          <element id="library" level="project" name="Gradle: org.springframework:spring-context:5.3.2" />
+          <element id="library" level="project" name="Gradle: org.springframework:spring-aop:5.3.2" />
+          <element id="library" level="project" name="Gradle: org.springframework:spring-web:5.3.2" />
+          <element id="library" level="project" name="Gradle: org.springframework:spring-beans:5.3.2" />
+          <element id="library" level="project" name="Gradle: org.springframework:spring-expression:5.3.2" />
+          <element id="library" level="project" name="Gradle: org.springframework:spring-core:5.3.2" />
+          <element id="library" level="project" name="Gradle: org.springframework:spring-jcl:5.3.2" />
+          <element id="library" level="project" name="Gradle: javax.servlet:servlet-api:2.5" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="validate_email.main/web/Web Gradle : validate_email-1.0-SNAPSHOT.war" />
+    </root>
+  </artifact>
+</component>

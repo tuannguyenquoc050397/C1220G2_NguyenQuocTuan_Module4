@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div th:object="${blog}">
+    <h3 th:text="${blog.getName()}"></h3>
+    <td th:if="${blog.category}" th:text="${blog.category.name}"></td>
+    <td th:unless="${blog.category}"></td>
+    <p th:text="${blog.getContent()}"></p>
+</div>
+</body>
+</html>

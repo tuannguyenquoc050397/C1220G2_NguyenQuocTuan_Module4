@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<a href="/">back</a>
+<h1 th:unless="${code}">Tra sach thanh cong</h1>
+
+<div th:if="${code}">
+    <h1>Thue sach thanh cong :vvv</h1>
+    <h2>Ma code: </h2>
+    <h2 th:text="${code}"></h2>
+</div>
+
+</body>
+</html>

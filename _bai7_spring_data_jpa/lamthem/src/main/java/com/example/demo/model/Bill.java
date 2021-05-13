@@ -10,6 +10,8 @@ public class Bill {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String date;
+
 
     public Bill() {
     }
@@ -22,5 +24,11 @@ public class Bill {
         this.id = id;
     }
 
+    public String getDate() {
+        return date;
+    }
 
+    public void setDate(String date) {
+        this.date = date;
+    }
 }

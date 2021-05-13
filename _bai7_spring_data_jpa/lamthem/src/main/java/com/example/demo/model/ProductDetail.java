@@ -11,7 +11,10 @@ public class ProductDetail {
 
     private String description;
 
-    private String cost;
+    private double cost;
+
+
+
 
     @OneToOne(mappedBy = "productDetail")
     private Product product;
@@ -35,11 +38,11 @@ public class ProductDetail {
         this.description = description;
     }
 
-    public String getCost() {
+    public double getCost() {
         return cost;
     }
 
-    public void setCost(String cost) {
+    public void setCost(double cost) {
         this.cost = cost;
     }
 
@@ -50,4 +53,5 @@ public class ProductDetail {
     public void setProduct(Product product) {
         this.product = product;
     }
+
 }

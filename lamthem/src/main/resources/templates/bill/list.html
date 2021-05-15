@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Bill list</h1>
+
+<form action="/bill/search" method="get">
+    <input type="text" name="searchName">
+    <input type="text" name="searchCost">
+    <input type="text" name="searchDate">
+    <input type="submit" value="search">
+    <p>chua lam duoc search,, phai nhap dung 3 truong moi search duoc</p>
+</form>
+<table border="1">
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>date</th>
+        <th>detail</th>
+    </tr>
+    </thead>
+    <tbody>
+    <th:block th:each="bill : ${bills}" >
+        <tr>
+            <td th:text="${bill.id}"></td>
+            <td th:text="${bill.date}"></td>
+            <td><a th:href="@{/bill/detail-bill/__${bill.id}__}">detail</a></td>
+        </tr>
+    </th:block>
+    </tbody>
+</table>
+
+<!--<div>-->
+<!--    <a th:href="@{'/bill'(page=${bills.number - 1})}" th:if="${bills.hasPrevious()}">Previous</a>-->
+<!--    <span th:text="${bills.number + 1}"></span>/<span th:text="${bills.totalPages}"></span>-->
+<!--    <a th:href="@{'/bill'(page=${bills.number + 1})}" th:if="${bills.hasNext()}">Next</a>-->
+<!--</div>-->
+
+</body>
+</html>

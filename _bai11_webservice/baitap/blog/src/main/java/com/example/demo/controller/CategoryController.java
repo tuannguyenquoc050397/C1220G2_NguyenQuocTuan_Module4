@@ -4,6 +4,8 @@ package com.example.demo.controller;
 import com.example.demo.model.Category;
 import com.example.demo.service.BlogService;
 import com.example.demo.service.CategoryService;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

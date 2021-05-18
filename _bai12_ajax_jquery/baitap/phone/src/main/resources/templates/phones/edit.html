@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>edit form</h1>
+
+<a href="/smartphones/list">back to list</a>
+<p id="mess">
+
+
+</p>
+<form id="edit-smartphone" th:object="${smartphone}" >
+    <input type="hidden" id="id" th:value="${smartphone.id}">
+    <table>
+        <tr>
+            <td>Producer</td>
+            <td><input type="text" id="producer" th:value="${smartphone.producer}"></td>
+        </tr>
+        <tr>
+            <td>Model</td>
+            <td><input type="text" id="model" th:value="${smartphone.model}"></td>
+        </tr>
+        <tr>
+            <td>Price</td>
+            <td><input type="text" id="price" th:value="${smartphone.price}"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input class="editSmartphone" type="submit" value="edit"></td>
+        </tr>
+    </table>
+</form>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+
+    $(document).ready(function () {
+        //sư kiện nào thực hiện Ajax
+        $(document).on("click", ".editSmartphone",function (event) {
+            console.log("edit ...")
+            //lay du lieu
+            let id = $('#id').val();
+            let producer = $('#producer').val();
+            let model = $('#model').val();
+            let price = $('#price').val();
+            let newSmartphone = {
+                id: id,
+                producer: producer,
+                model: model,
+                price: price
+            };
+            $.ajax({
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                type: "PUT",
+                data: JSON.stringify(newSmartphone),
+                url: `/smartphones/edit-smartphone`,
+                success(smartphone){
+                    var content = "";
+                    content += "    <p> smartphone was edit:\n" +
+                        "\n" + smartphone.producer +
+                    "\n" + smartphone.model +
+                    "\n" + smartphone.price +
+                    "    </p>"
+                    document.getElementById("mess").innerHTML = content;
+                }
+            });
+            //chặn sự kiện mặc định của thẻ
+            event.preventDefault();
+        });
+    })
+</script>
+</body>
+</html>

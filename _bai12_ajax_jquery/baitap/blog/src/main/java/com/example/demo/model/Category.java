@@ -1,7 +1,6 @@
 package com.example.demo.model;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -20,7 +19,6 @@ public class Category {
     private Long id;
 
     private String name;
-
 
     @OneToMany(mappedBy = "category")
     private List<Blog> blogs;

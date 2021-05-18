@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Smartphone List</h1>
+<form id="search">
+    <input type="text" id="searchName" >
+    <input type="submit" value="search" >
+</form>
+<div class="body">
+    <table id="blogList">
+        <tr>
+            <td>name</td>
+            <td>content</td>
+            <td>dayPost</td>
+            <td>category</td>
+        </tr>
+        <th:block th:each="blog: ${blogs}">
+            <tr>
+                <td th:text="${blog.name}"></td>
+                <td th:text="${blog.content}"></td>
+                <td th:text="${blog.dayPost}"></td>
+                <td th:if="${blog.category}" th:text="${blog.category.name}"></td>
+            </tr>
+        </th:block>
+    </table>
+    <a href="#" id="xemthem">xemthem</a>
+
+</div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#search').submit(function (event) {
+            //lay du lieu
+            let searchName = $('#searchName').val();
+            $.ajax({
+                type: "GET",
+                url: `/search-blog/${searchName}`,
+                dataType: "HTML",
+                success: function (data) {
+                    $(".body").html(data)
+                }
+            });
+            event.preventDefault();
+        });
+    })
+    $(document).ready(function () {
+        $(document).on("click", "#xemthem",function (event) {
+            //lay du lieu
+            $.ajax({
+                type: "GET",
+                url: `/xemthem`,
+                dataType: "HTML",
+                success: function (data) {
+                    $(".body").html(data)
+                }
+            });
+            event.preventDefault();
+        });
+    })
+</script>
+</body>
+</html>

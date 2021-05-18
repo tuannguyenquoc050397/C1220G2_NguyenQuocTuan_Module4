@@ -1,10 +1,8 @@
 package com.example.demo.model;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import org.springframework.context.annotation.EnableMBeanExport;
 
 import javax.persistence.*;
 

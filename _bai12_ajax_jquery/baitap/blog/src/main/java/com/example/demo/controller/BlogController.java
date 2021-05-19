@@ -18,7 +18,7 @@ public class BlogController {
 
     private static int count = 2;
     @Autowired
-    BlogService blogService;
+    private BlogService blogService;
 
     @Autowired
     private CategoryService categoryService;

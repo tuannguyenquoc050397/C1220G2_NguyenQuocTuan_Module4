@@ -17,4 +17,5 @@ public interface BlogRepository extends JpaRepository<Blog, Long> {
     @Query( value ="select * from blog limit ?1" , nativeQuery = true )
     List<Blog> findLimit(int limit);
 
+
 }

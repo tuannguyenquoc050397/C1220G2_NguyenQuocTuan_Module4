@@ -17,7 +17,7 @@ import java.util.List;
 public class HomeController {
 
     @Autowired
-    SmartphoneService smartphoneService;
+    private SmartphoneService smartphoneService;
 
 
     @GetMapping("/edit/{id}")

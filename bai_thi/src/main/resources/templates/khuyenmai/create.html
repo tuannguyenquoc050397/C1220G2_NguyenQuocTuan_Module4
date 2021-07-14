@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+</head>
+<body style="background-image: url('https://i.pinimg.com/originals/4c/32/b8/4c32b8c9d316da2348be65685f578264.jpg')">
+<h3 style="text-align: center">Them moi khuyen mai</h3>
+
+<div class="container">
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-6">
+            <form th:action="@{create-khuyenmai}" th:object="${khuyenmai}" method="post">
+                <div class="form-group">
+                    <label for="Name">tieude</label>
+                    <input type="text" th:field="*{tieuDe}" class="form-control" id="Name" placeholder="nhap tieu de">
+                    <p style="color: red" th:if="${#fields.hasErrors('tieuDe')}" th:errors="*{tieuDe}">Name Error</p>
+                </div>
+                <div class="form-group">
+                    <label for="cost">thoi gian bat dau</label>
+                    <input type="date" th:field="*{thoiGianBatDau}" class="form-control" id="cost" placeholder="nhap thoiGianBatDau">
+                    <p style="color: red" th:if="${#fields.hasErrors('thoiGianBatDau')}" th:errors="*{thoiGianBatDau}">Name Error</p>
+
+                </div>
+
+                <div class="form-group">
+                    <label for="Description">thoi gian ket thuc</label>
+                    <input type="date" th:field="*{thoiGianKetThuc}" class="form-control" id="Description" placeholder="nhap thoiGianKetThuc">
+                    <p style="color: red" th:if="${#fields.hasErrors('thoiGianKetThuc')}" th:errors="*{thoiGianKetThuc}">Name Error</p>
+                </div>
+                <div class="form-group">
+                    <label for="Description1">muc giam gia</label>
+                    <input type="number" th:field="*{mucGiamGia}" class="form-control" id="Description1" placeholder="nhap mucGiamGia">
+                    <p style="color: red" th:if="${#fields.hasErrors('mucGiamGia')}" th:errors="*{mucGiamGia}">Name Error</p>
+                </div>
+                <div class="form-group">
+                    <label for="Description2">chi tiet</label>
+<!--                    <textarea>-->
+<!--                        -->
+<!--                    </textarea>-->
+                    <input type="text" th:field="*{chiTiet}" class="form-control" id="Description2" placeholder="nhap chiTiet">
+                    <p style="color: red" th:if="${#fields.hasErrors('chiTiet')}" th:errors="*{chiTiet}">Name Error</p>
+                </div>
+                <button type="submit" class="btn btn-primary">Them moi</button>
+                <a type="button" class="btn btn-success" href="/khuyenmai">Close</a>
+
+            </form>
+        </div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="createEdit">
+    <a href="/">back to home</a>
+<div class="container-fluid">
+    <h2>Employee</h2>
+    <button type="button" class="btn btn-primary btn-lg" id="btnModelCreate">
+        Add New Employee
+    </button>
+
+</div>
+
+<div class="container-fluid ">
+
+    <div class="tableCustomer">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Address</th>
+                <th>DOB</th>
+                <th>Edit</th>
+                <th>Detail</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <th:block th:each="employee : ${employees}">
+                <tr>
+                    <td th:text="${employee.name}"></td>
+                    <td th:text="${employee.address}"></td>
+                    <td th:text="${employee.dateOfBirth}"></td>
+                    <td><button th:data-id_edit="${employee.id}" type="button"
+                                class="btn btn-primary btn-lg edit" >
+                        edit
+                    </button>
+                    </td>
+                    <td><button th:data-id_detail="${employee.id}" type="button"
+                                class="btn btn-primary btn-lg detail" >
+                        detail
+                    </button>
+                    </td>
+                    <td>
+                        <a type="button" class="btn btn-primary btn-lg delete" data-toggle="modal"
+                           th:attr="data-target='#recordDeleteModal'+${employee.id}">
+                            <i class="fas fa-trash-alt"></i>delete</i>
+                        </a>
+
+                        <!-- Modal Delete -->
+                        <div class="modal fade" th:attr="id='recordDeleteModal'+${employee.id}" tabindex="-1"
+                             role="dialog" aria-labelledby="recordDeleteModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="recordDeleteModalLabel">Delete Record</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Are you sure you want to delete this record? <br> Id:
+                                        <span class="text-danger" th:text="${employee.id}"></span> and Name:
+                                        <span class="text-danger" th:text="${employee.name}"></span> and birthday:
+                                        <span class="text-danger" th:text="${employee.dateOfBirth}"></span>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel
+                                        </button>
+                                        <a class="btn btn-primary"
+                                           th:attr="href='/employees/delete-employee/'+${employee.id}"> Delete
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </td>
+                </tr>
+            </th:block>
+
+            </tbody>
+        </table>
+        <div>
+            <a th:href="@{'/employees'(page=${employees.number - 1})}" th:if="${employees.hasPrevious()}">Previous</a>
+            <span th:text="${employees.number + 1}"></span>/<span th:text="${employees.totalPages}"></span>
+            <a th:href="@{'/employees'(page=${employees.number + 1})}" th:if="${employees.hasNext()}">Next</a>
+        </div>
+    </div>
+</div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("#btnModelCreate").click(function (event) {
+            $.ajax({
+                type: "GET",
+                url: "/employees/create-employee",
+                dataType: "HTML",
+                success: function (data) {
+
+                    $(".createEdit").html(data);
+                    // $("#ModelId").modal('show');
+                }
+            });
+            event.preventDefault();
+        });
+        $(".edit").click(function (event) {
+            let id = $(this).data("id_edit");
+            $.ajax({
+                type: "GET",
+                url: "/employees/edit-employee/"+id,
+                dataType: "HTML",
+                success: function (data) {
+                    $(".createEdit").html(data);
+                    // $("#ModelId").modal('show');
+                }
+            });
+            event.preventDefault();
+        });
+        $(".detail").click(function (event) {
+            let id = $(this).data("id_detail");
+            $.ajax({
+                type: "GET",
+                url: "/employees/detail-employee/"+id,
+                dataType: "HTML",
+                success: function (data) {
+                    $(".createEdit").html(data);
+                    // $("#ModelId").modal('show');
+                }
+            });
+            event.preventDefault();
+        });
+    });
+</script>
+</body>
+</html>

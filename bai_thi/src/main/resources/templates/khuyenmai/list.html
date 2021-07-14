@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+
+</head>
+<body class="createEdit" style="background-image: url('https://i.pinimg.com/originals/4c/32/b8/4c32b8c9d316da2348be65685f578264.jpg')">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <a href="/khuyenmai"><i class="fas fa-home" style="font-size: 30px ; margin-top: 10px"> Full List </i></a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">
+        </div>
+        <div class="col-8">
+            <h1>Danh Sach Khuyen Mai
+            <button type="button" class="btn btn-primary btn-lg" id="btnModelCreate">them moi</button>
+            </h1>
+        </div>
+    </div>
+</div>
+
+<p th:if="${message}" th:value="${message}"></p>
+<p th:unless="${message}"></p>
+
+<hr>
+
+<div class="container-fluid">
+    <div class="row">
+        <form class="form-inline" th:action="@{/khuyenmai}">
+            <input type="text" class="form-control" placeholder="giam gia" name="mucGiamGia" th:value="${mucGiamGia}"> &ensp;
+            <input type="date" class="form-control" placeholder="tg bat dau" name="thoiGianBatDau" th:value="${thoiGianBatDau}"> &ensp;
+            <input type="date" class="form-control" placeholder="tg ket thuc" name="thoiGianKetThuc" th:value="${thoiGianKetThuc}"> &ensp;
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Tim kiem</button>
+        </form>
+    </div>
+
+</div>
+
+
+<div class="container-fluid" >
+    <div class="row" style="height: 270px">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th><h5>Tieu de</h5></th>
+                <th><h5>TG bat dau</h5></th>
+                <th><h5>TG ket thuc</h5></th>
+                <th><h5>giam gia</h5></th>
+                <th><h5>chi tiet</h5></th>
+                <th colspan="2" style="text-align: center"><h5>Action</h5></th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="khuyenmai : ${khuyenmais}">
+                <tr>
+                    <td th:text="${khuyenmai.tieuDe}"></td>
+                    <td th:text="${khuyenmai.thoiGianBatDau}"></td>
+                    <td th:text="${khuyenmai.thoiGianKetThuc}"></td>
+                    <td th:text="${khuyenmai.mucGiamGia}"></td>
+                    <td th:text="${khuyenmai.chiTiet}"></td>
+                    <td><button th:data-id_edit="${khuyenmai.id}" type="button"
+                                class="btn btn-primary btn-lg edit" >
+                        Sua
+                    </button>
+                    </td>
+                    <td>
+                        <a type="button" class="btn btn-danger btn-lg delete" data-toggle="modal"
+                           th:attr="data-target='#recordDeleteModal'+${khuyenmai.id}">Xoa</i>
+                        </a>
+                        <!-- Modal Delete -->
+                        <div class="modal fade" th:attr="id='recordDeleteModal'+${khuyenmai.id}" tabindex="-1"
+                             role="dialog" aria-labelledby="recordDeleteModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="recordDeleteModalLabel">Delete Record</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Ban co muon xoa khuyen mai co <br> Id:
+                                        <span class="text-danger" th:text="${khuyenmai.id}"></span> va tieu de:
+                                        <span class="text-danger" th:text="${khuyenmai.tieuDe}"></span>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Huy
+                                        </button>
+                                        <a class="btn btn-primary"
+                                           th:attr="href='/delete/'+${khuyenmai.id}">Xoa
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <div>
+            <a th:href="@{'/khuyenmai'(page=${khuyenmais.number - 1})}" th:if="${khuyenmais.hasPrevious()}">Previous</a>
+            <span th:text="${khuyenmais.number + 1}"></span>/<span th:text="${khuyenmais.totalPages}"></span>
+            <a th:href="@{'/khuyenmai'(page=${khuyenmais.number + 1})}" th:if="${khuyenmais.hasNext()}">Next</a>
+        </div>
+    </div>
+
+
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("#btnModelCreate").click(function (event) {
+            $.ajax({
+                type: "GET",
+                url: "/create-khuyenmai",
+                dataType: "HTML",
+                success: function (data) {
+                    $(".createEdit").html(data);
+                    // $("#ModelId").modal('show');
+                }
+            });
+            event.preventDefault();
+        });
+        // $(".edit").click(function (event) {
+        //     let id = $(this).data("id_edit");
+        //     $.ajax({
+        //         type: "GET",
+        //         url: "/edit-product/"+id,
+        //         dataType: "HTML",
+        //         success: function (data) {
+        //             $(".createEdit").html(data);
+        //             // $("#ModelId").modal('show');
+        //         }
+        //     });
+        //     event.preventDefault();
+        // });
+        // $(".detail").click(function (event) {
+        //     let id = $(this).data("id_detail");
+        //     $.ajax({
+        //         type: "GET",
+        //         url: "/employees/detail-employee/"+id,
+        //         dataType: "HTML",
+        //         success: function (data) {
+        //             $(".createEdit").html(data);
+        //             // $("#ModelId").modal('show');
+        //         }
+        //     });
+        //     event.preventDefault();
+        // });
+    });
+</script>
+</body>
+</html>

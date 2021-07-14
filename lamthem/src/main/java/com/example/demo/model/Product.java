@@ -1,6 +1,7 @@
 package com.example.demo.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table
@@ -21,6 +22,9 @@ public class Product {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "product_detail_id", referencedColumnName = "id")
     private ProductDetail productDetail;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private Set<ProductBill> bills;
 
     public Product() {
     }

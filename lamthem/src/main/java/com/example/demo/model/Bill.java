@@ -2,6 +2,7 @@ package com.example.demo.model;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table
@@ -12,6 +13,8 @@ public class Bill {
 
     private String date;
 
+    @OneToMany(mappedBy = "bill", cascade = CascadeType.ALL)
+    private Set<ProductBill> products;
 
     public Bill() {
     }

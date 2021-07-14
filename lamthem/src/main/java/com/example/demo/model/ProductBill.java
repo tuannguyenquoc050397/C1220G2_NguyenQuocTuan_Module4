@@ -9,12 +9,13 @@ public class ProductBill {
     @EmbeddedId
     private CourseRatingKey id;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @MapsId("product_id")
     @JoinColumn(name = "product_id")
     private Product product;
 
-    @ManyToOne
+
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @MapsId("bill_id")
     @JoinColumn(name = "bill_id")
     private Bill bill;
